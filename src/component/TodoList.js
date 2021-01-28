@@ -9,30 +9,51 @@ class TodoList extends Component {
 
     this.addTodo = this.addTodo.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.deleteTodo = this.deleteTodo.bind(this);
+    this.markComplete = this.markComplete.bind(this);
 
     this.state = {
-      todos: [
-        { name: "Install VSCode", complete: true },
-        { name: "Install Nodejs", complete: true },
-        { name: "Setup Github Acct", complete: true },
-        { name: "Install Prettier", complete: false },
-        { name: "Win at IT242", complete: false },
-        { name: "Take a rest", complete: false },
-      ],
+      todos: [],
       newTodoItem: "",
     };
   }
 
   addTodo(event) {
     event.preventDefault();
+
+    this.setState({
+      ...this.state,
+      todos: [
+        ...this.state.todos,
+        { name: this.state.newTodoItem, complete: false },
+      ],
+      newTodoItem: "",
+    });
   }
 
   handleChange(event) {
     this.setState({ ...this.state.todos, newTodoItem: event.target.value });
   }
 
+  deleteTodo(index) {
+    // this.state.todos[index]
+    // array.splice(index, 1)
+
+    const newTodoArray = [...this.state.todos];
+    newTodoArray.splice(index, 1);
+
+    this.setState({ ...this.state, todos: newTodoArray });
+  }
+
+  markComplete(index) {
+    const newTodoArray = [...this.state.todos];
+    newTodoArray[index] = { name: newTodoArray[index].name, complete: true };
+
+    this.setState({ ...this.state, todos: newTodoArray });
+  }
+
   componentDidUpdate() {
-    console.log(this.state.newTodoItem);
+    // console.log(this.state.newTodoItem);
   }
 
   render() {
@@ -58,10 +79,16 @@ class TodoList extends Component {
           </div>
 
           <list>
-            {this.state.todos.map((todo) => {
+            {this.state.todos.map((todo, index) => {
               return (
                 <item>
-                  <TodoItem name={todo.name} complete={todo.complete} />
+                  <TodoItem
+                    id={index}
+                    name={todo.name}
+                    complete={todo.complete}
+                    onDelete={this.deleteTodo}
+                    onComplete={this.markComplete}
+                  />
                 </item>
               );
             })}

@@ -15,7 +15,7 @@ h4 {
 
 .TodoContainer {
   margin: auto;
-  width: 40%;
+  width: 60%;
   text-align: left;
 }
 
@@ -34,6 +34,8 @@ h4 {
   border-radius: 5px;
   padding: .75em;
   margin-bottom: .75em;
+  width: 100%;
+  display: inline-block;
 }
 
 .TodoNotDone {
@@ -42,4 +44,9 @@ h4 {
 
 .TodoDone {
   background-color: darkgreen;
+}
+
+.TodoButtons {
+  float: right;
+  margin-left: auto;
 }
