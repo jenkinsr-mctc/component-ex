@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import TodoItem from "./TodoItem";
+import { Grid, Paper } from "@material-ui/core";
 
 import "../App.css";
 
@@ -58,7 +59,14 @@ class TodoList extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div>
+        <Grid container spacing={3}>
+          <Grid item={3}>&nbsp;</Grid>
+          <Grid item xs={6}>
+            <Paper>Hello!</Paper>
+          </Grid>
+          <Grid item={3}>&nbsp;</Grid>
+        </Grid>
         <div className="TodoContainer">
           <div className="TodoHeader">
             <h4>My ToDo List</h4>
